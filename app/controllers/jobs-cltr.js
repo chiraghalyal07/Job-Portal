@@ -1,6 +1,7 @@
 const Job = require('../models/job-model')
 const Application = require('../models/application-model')
 const {validationResult} = require('express-validator')
+const { jobType } = require('../validations/jobs-validation')
 const jobsCltr ={}
 jobsCltr.list = async(req,res)=>{
     try { 
@@ -69,7 +70,7 @@ jobsCltr.applications = async(req,res) =>{
     if(!job){
         return res.status(404).json({errors:"record not found"})
     }
-    const applications =  await Application.find({job:job._id})
+    const applications =  await Application.find({job:job._id}).populate('candidate')
     res.json(applications)
 }
 jobsCltr.singleApplication = async(req,res) => {
@@ -79,7 +80,7 @@ jobsCltr.singleApplication = async(req,res) => {
     if(!job){
         return res.status(404).json({errors:"record not found"})
     }
-    const application = await Application.findOne({_id:appId,job:job._id})
+    const application = await Application.findOne({_id:appId,job:job._id}).populate('candidate').populate('job')
     res.json(application)
 }
 jobsCltr.applicationUpdate = async(req,res) =>{

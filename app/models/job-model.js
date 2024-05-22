@@ -8,6 +8,7 @@ const jobSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:'User'
     },
+   
     openings:Number,
     location:[String],
     jobType:String,

@@ -35,7 +35,7 @@ applicationsCltr.check = async (req, res) => {
 }
 applicationsCltr.list = async(req,res) =>{
     const jobId = req.query.jobId
-    const applications = await Application.find({job:jobId})
+    const applications = await Application.find({job:jobId}).populate('candidate')
     res.json(applications)
 }
 

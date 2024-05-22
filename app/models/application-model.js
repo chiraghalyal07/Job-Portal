@@ -7,7 +7,7 @@ const applicationSchema = new Schema({
     },
     job:{
         type:Schema.Types.ObjectId,
-        ref:'job'
+        ref:'Job'
     },
     status:{
         type:String,
